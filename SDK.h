@@ -792,16 +792,6 @@ public:
     /**
      * @brief Teleport this player to a world position.
      * @param x,y,z Target coordinates.
-     */
-    MODAPI virtual void teleportTo(double x, double y, double z) override;
-
-    /**
-     * @brief Apply damage to this player from a damage source.
-     * @param source Damage source.
-     * @param dmg    Damage in half-hearts.
-     * @return true if damage was applied.
-     */
-    MODAPI virtual bool hurt(DamageSource* source, float dmg) override;
 
     /**
      * @brief Check if this player can harm another player (PvP check).
@@ -809,18 +799,6 @@ public:
      * @return true if PvP is allowed and the player can attack.
      */
     MODAPI bool canHarmPlayer(shared_ptr<Player> target);
-
-    /**
-     * @brief Give XP levels to this player.
-     * @param amount Levels to add.
-     */
-    MODAPI virtual void giveExperienceLevels(int amount) override;
-
-    /**
-     * @brief Change which dimension this player is in.
-     * @param i Target dimension.
-     */
-    MODAPI virtual void changeDimension(int i) override;
 
     /**
      * @brief Set the game mode for this player.
