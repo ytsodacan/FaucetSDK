@@ -3,6 +3,7 @@
 #include "SDK.h"
 #include "Registry.h"
 #include "RegistryTypes.h"
+#pragma comment(lib, "Faucet.lib")
 
 class ExampleMod final : public IMod
 {
