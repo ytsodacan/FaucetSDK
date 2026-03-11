@@ -91,4 +91,10 @@ public:
      * @brief Called on shutdown. Unregister commands/events, free resources.
      */
     virtual void OnShutdown() = 0;
+
+    virtual void OnRegister() = 0;
+
+    virtual void OnLevelLoad() = 0;
+
+    virtual void OnLevelUnload() = 0;
 };
