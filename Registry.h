@@ -7,6 +7,12 @@
 #include <mutex>
 #include "ModExport.h"
 
+#ifdef MODLOADER_HOST
+#define REGISTRY_API __declspec(dllexport)
+#else
+#define REGISTRY_API __declspec(dllimport)
+#endif
+
 // ============================================================================
 // Registry
 //
@@ -116,10 +122,10 @@ namespace Registry
 
         // Register tool items.
         MODAPI RegisteredItem RegisterPickaxe(const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        MODAPI RegisteredItem RegisterShovel (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        MODAPI RegisteredItem RegisterAxe    (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        MODAPI RegisteredItem RegisterHoe    (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        MODAPI RegisteredItem RegisterSword  (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterShovel(const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterAxe(const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterHoe(const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterSword(const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
 
         // Register a named tool material (for custom harvest level / destroy speed).
         void RegisterToolMaterial(const Identifier& id, const ToolMaterialDefinition& def);
@@ -152,8 +158,8 @@ namespace Registry
         // keys: pairs of (character, ingredient identifier)
         struct ShapedKey { wchar_t key; Identifier ingredient; };
         void AddShaped(const Identifier& result, int resultCount,
-                       const std::vector<std::wstring>& pattern,
-                       const std::vector<ShapedKey>& keys);
+            const std::vector<std::wstring>& pattern,
+            const std::vector<ShapedKey>& keys);
     }
 
     // ----------------------------------------------------------------
