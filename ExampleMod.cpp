@@ -1,11 +1,14 @@
 #include "pch.h"
 #include "IMod.h"
 #include "SDK.h"
+#include "Registry.h"
+#include "RegistryTypes.h"
 
-
-class ExampleMod final : public IMod {
+class ExampleMod final : public IMod
+{
 public:
-    const ModInfo* GetInfo() const override {
+    const ModInfo* GetInfo() const override
+    {
         static const ModInfo info{
             "com.SillyProotSoda.examplemod",
             "Example Mod",
@@ -16,30 +19,45 @@ public:
         return &info;
     }
 
-    bool OnLoad() override {
+    bool OnLoad() override
+    {
         SDK::Log(L"ExampleMod: OnLoad");
         return true;
     }
 
-    bool OnInit() override {
+    bool OnInit() override
+    {
         SDK::Log(L"ExampleMod: OnInit");
         return true;
     }
 
-    bool OnUpdate(float deltaTime) override {
+    void OnRegister() override
+    {
+        Registry::Item::Register(
+            Identifier(L"sillyprootsoda:exampleitem"),
+            ItemProperties()
+            .MaxStackSize(64)
+            .Icon(L"sillyprootsoda:exampleitem")
+            .Name(L"Example Item")
+            .InCreativeTab(CreativeTab::Materials));
+
+        SDK::Log(L"ExampleMod: registered items");
+    }
+
+    bool OnUpdate(float deltaTime) override
+    {
         return true;
     }
 
-    void OnShutdown() override {
+    void OnShutdown() override
+    {
         SDK::Log(L"ExampleMod: shutting down");
     }
+    void OnLevelLoad()   override {}
+    void OnLevelUnload() override {}
+};
 
-private:
-    void onSecondTick() {
-    }
-
-}; 
-
-extern "C" __declspec(dllexport) IMod* CreateMod() {
+extern "C" __declspec(dllexport) IMod* CreateMod()
+{
     return new ExampleMod();
 }
