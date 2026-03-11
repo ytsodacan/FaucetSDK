@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 #include <mutex>
+#include "ModExport.h"
 
 // ============================================================================
 // Registry
@@ -92,14 +93,14 @@ namespace Registry
     namespace Block
     {
         // Register a static block (no custom callbacks).
-        RegisteredBlock Register(const Identifier& id, const BlockProperties& props);
+        MODAPI RegisteredBlock Register(const Identifier& id, const BlockProperties& props);
 
         // Register a slab pair (half + double).
         // Returns RegisteredSlabBlock with both numeric IDs populated.
-        RegisteredSlabBlock RegisterSlab(const Identifier& id, const BlockProperties& props);
+        MODAPI RegisteredSlabBlock RegisterSlab(const Identifier& id, const BlockProperties& props);
 
         // Register a falling block (like gravel/sand).
-        RegisteredBlock RegisterFalling(const Identifier& id, const BlockProperties& props);
+        MODAPI RegisteredBlock RegisterFalling(const Identifier& id, const BlockProperties& props);
 
         // Lookup a previously registered block's numeric ID.
         int GetNumericId(const Identifier& id);
@@ -111,14 +112,14 @@ namespace Registry
     namespace Item
     {
         // Register a plain item.
-        RegisteredItem Register(const Identifier& id, const ItemProperties& props);
+        MODAPI RegisteredItem Register(const Identifier& id, const ItemProperties& props);
 
         // Register tool items.
-        RegisteredItem RegisterPickaxe(const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        RegisteredItem RegisterShovel (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        RegisteredItem RegisterAxe    (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        RegisteredItem RegisterHoe    (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
-        RegisteredItem RegisterSword  (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterPickaxe(const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterShovel (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterAxe    (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterHoe    (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
+        MODAPI RegisteredItem RegisterSword  (const Identifier& id, const ItemProperties& props, ToolTier tier = ToolTier::Diamond);
 
         // Register a named tool material (for custom harvest level / destroy speed).
         void RegisterToolMaterial(const Identifier& id, const ToolMaterialDefinition& def);
@@ -132,7 +133,7 @@ namespace Registry
     // ----------------------------------------------------------------
     namespace Entity
     {
-        RegisteredEntity Register(const Identifier& id, const EntityDefinition& def);
+        MODAPI RegisteredEntity Register(const Identifier& id, const EntityDefinition& def);
 
         // Lookup a previously registered entity's numeric ID.
         int GetNumericId(const Identifier& id);
