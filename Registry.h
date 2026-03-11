@@ -7,12 +7,6 @@
 #include <mutex>
 #include "ModExport.h"
 
-#ifdef MODLOADER_HOST
-#define REGISTRY_API __declspec(dllexport)
-#else
-#define REGISTRY_API __declspec(dllimport)
-#endif
-
 // ============================================================================
 // Registry
 //
@@ -168,13 +162,8 @@ namespace Registry
     // ----------------------------------------------------------------
     namespace Internal
     {
-        // Queue a creative item for injection (called from Block/Item Register).
-        void QueueCreativeItem(int numericId, int count, int auxValue, int groupIndex);
-
-        // Access the pending creative queue (ModLoader calls this after init).
-        const std::vector<PendingCreativeItem>& GetPendingCreativeItems();
-
-        // Clear the queue after injection.
-        void ClearPendingCreativeItems();
+        MODAPI void QueueCreativeItem(int numericId, int count, int auxValue, int groupIndex);
+        MODAPI const std::vector<PendingCreativeItem>& GetPendingCreativeItems();
+        MODAPI void ClearPendingCreativeItems();
     }
 }
